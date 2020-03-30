@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body >
+<div id="table-list"></div>
+</body>
+
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+    console.log("Load Page !!!");
+    
+
+	 
+	 $.post("/getUserList",null,
+			  function(data, status){
+			   console.log(data);
+			    var arr=data;
+			    document.write("<div>");
+			    document.write("<table >");
+			    document.write("<tr> <td>ID</td> <td>USER NAME</td> <td>PASSWORD</td> </tr>");
+			    for (var i = 0; i < arr.length; i++){
+			    	  var obj = arr[i];
+			    	  document.write(" <tr>"+"<td>"+ obj.id +"</td>"+"<td>"+ obj.name +"</td>"+"<td>"+ obj.pass +"</td> <td><form action='/userEdit/"+ obj.id+"' > <button id='Edit' value='"+ obj.id +"'>Edit</button></form> </td> <td><form action='/delete/"+ obj.id+"' > <button id='Edit' value='"+ obj.id +"'>Delete</button></form> </td> </tr>");
+			    }
+			    document.write("</table>");
+			    document.write("</div>");
+			  });
+	 
+});
+</script>
+</html>
