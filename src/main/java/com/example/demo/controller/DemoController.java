@@ -1,12 +1,12 @@
 package com.example.demo.controller;
 
-import java.util.List;
+//import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+//import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,12 +15,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.model.User;
 
+import com.example.demo.service.UserService;
+
 @Controller
 public class DemoController {
 	public DemoController() {
 		System.out.print("dddddđsssssssssssssss");
 	}
 
+	
 	@RequestMapping("/")
 	public String index() {
 		return "index.html";
@@ -30,6 +33,10 @@ public class DemoController {
 	public String Login() {
 		return "login";
 	}
+	@RequestMapping("/register")
+	public String register() {
+		return "register";
+	}
 
 	@PostMapping("/submitlogin")
 	public ModelAndView SubmitLogin(@ModelAttribute("user") User user) {
@@ -37,7 +44,7 @@ public class DemoController {
 		model.addObject("user", user);
 		return model;
 	}
-
+	
 	@RequestMapping("/userList")
 	public String Userpage() {
 		return "userList";
@@ -60,11 +67,21 @@ public class DemoController {
 		return "userList";
 	}
 	
-	@RequestMapping("/change")
-	public String UpdateUser(User user) {
-		service.update(user);
-		return "userList";
+	@PostMapping("/change")
+	public String UpdateUser(User user)
+	{
+	service.update(user);
+	return "userList";
 	}
+	
+	
+	@PostMapping("/newuser")
+	public String NewUser(User user)
+	{
+	service.insert(user);
+	return "userList";
+	}
+
 
 
 }

@@ -13,7 +13,7 @@
 
 <div class="container">
   <h2>Edit form</h2>
-  <form action="/change">
+  <form action="/change" method="post">
   <div class="form-group">
       <label >ID:</label>
       <input type="text" class="form-control" id="ID" placeholder="Enter User Name" name="id" th:value="${user.id}">
@@ -29,7 +29,7 @@
       <input type="text" class="form-control" id="pass" placeholder="Enter password" name="pass" th:value="${user.pass}">
     </div>
     
-    <input type="button" id="changeId" class="btn btn-primary" value="change">
+    <input type="submit" id="changeId" class="btn btn-primary" value="change">
   </form>
 </div>
 
@@ -55,7 +55,7 @@ var jsonObject={
 console.log(jsonObject);
 	$("#changeId").click(function(){
 		
-		$.get("/change",jsonObject,
+		$.post("/change",jsonObject,
 				  function(data, status){
 				    console.log(data);
 				  });
